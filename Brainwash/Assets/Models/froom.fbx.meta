@@ -9,6 +9,8 @@ ModelImporter:
     2100002: wall
     2100004: roof
     2100006: floor
+    2100008: Floor2
+    2100010: wall2
     2300000: //RootNode
     3300000: //RootNode
     4300000: Cube
