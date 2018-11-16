@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-
+    public static PlayerMovement playerInstance;
 	Vector3 []targets;
 	int target = 1;
 	int last = 1;
@@ -13,6 +13,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	private float step;
 
+    void Awake()
+    {
+        playerInstance = this;
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -27,12 +31,19 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (target != 1) {
 
-			if (last == 1) {
+			if (last == 1)
+            {
 				
 				transform.position = Vector3.MoveTowards (transform.position, targets [target], step);
-			} else {
+
+                //if near door, activate room door reached, get boolean from door script
+			}
+            else
+            {
 				transform.position = Vector3.MoveTowards (transform.position, targets [1], step);
-				if (Vector3.Distance(transform.position, targets[1]) < 0.05f) {
+
+				if (Vector3.Distance(transform.position, targets[1]) < 0.05f)
+                {
 					last = 1;
 				}
 			}
@@ -44,6 +55,9 @@ public class PlayerMovement : MonoBehaviour {
 		targets [0] = target0;
 		targets [1] = target1;
 		targets [2] = target2;
+
+        target = 1;
+        last = 1;
 	}
 
 	public void setMovement(int index){

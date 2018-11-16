@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour {
 
+    [SerializeField]
+    private LayerMask raycastLayer;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,14 +18,21 @@ public class PlayerInteraction : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 
-			if (Physics.Raycast (ray, out hit)) {
-				
-				if (hit.transform.name == "target0") {
-					
-					GameObject.FindObjectOfType<PlayerMovement>().setMovement(0);
-				} else if (hit.transform.name == "target2") {
-					GameObject.FindObjectOfType<PlayerMovement>().setMovement(2);
-				}
+			if (Physics.Raycast (ray, out hit, raycastLayer)) {
+
+                if (hit.transform.name == "doorLeft")
+                {
+
+                    GameObject.FindObjectOfType<PlayerMovement>().setMovement(0);
+                }
+                else if (hit.transform.name == "doorRight")
+                {
+                    GameObject.FindObjectOfType<PlayerMovement>().setMovement(2);
+                }
+                else if (hit.transform.GetComponent<Interactable>())
+                {
+                    hit.transform.GetComponent<Interactable>().Interact();
+                }
 			}
 		}
 	}

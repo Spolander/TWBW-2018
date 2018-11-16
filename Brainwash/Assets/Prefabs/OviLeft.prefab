@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4844610940911430}
   m_Layer: 0
-  m_Name: Ovi
+  m_Name: OviLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
