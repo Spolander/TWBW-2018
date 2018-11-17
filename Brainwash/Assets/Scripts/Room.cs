@@ -16,6 +16,8 @@ public class Room : MonoBehaviour {
     [SerializeField]
     private Transform cameraTransform;
 
+    public Transform CameraTransform { get { return cameraTransform; } }
+
     [SerializeField]
     private AudioSource questionSound;
 
@@ -24,6 +26,7 @@ public class Room : MonoBehaviour {
 
     [SerializeField]
     private AudioSource wrongAnswer;
+
 
 
     public void InitializeRoom(bool lastAnwserRight)
@@ -37,6 +40,7 @@ public class Room : MonoBehaviour {
     public void DoorReached(bool rightAnswer, bool killTarget)
     {
 
+        float answerDelay = 0;
         //väärä vastaus
         if (rightAnswer == false)
         {
@@ -50,12 +54,26 @@ public class Room : MonoBehaviour {
                 gameOver(rightAnswer);
                 return;
             }
+            else
+            {
+                if (wrongAnswer)
+                {
+                    wrongAnswer.Play();
+                    answerDelay = wrongAnswer.clip.length;
+                }
+            }
 
         }
 
         //oikea vastaus
         else
         {
+            if(this.rightAnswer)
+            {
+                this.rightAnswer.Play();
+                answerDelay = this.rightAnswer.clip.length;
+            }
+        
             if (Player.hitPoints <= 0)
             {
                 //good ending
@@ -68,20 +86,11 @@ public class Room : MonoBehaviour {
 
         if (nextRoom)
         {
-            //jos on tapettu jokin äijä, niin odotetaan hetki reaktiota ja sitten aloitetaan fade
-            if (killTarget)
-            {
-                ScreenFader.instance.Fade(2, 0.5f);
-                StartCoroutine(loadNextRoom(2,rightAnswer));
-            }
-            else
-            {
-                ScreenFader.instance.Fade(0, 0.5f);
-                StartCoroutine(loadNextRoom(0,rightAnswer));
-            }
 
-
-           
+                ScreenFader.instance.Fade(answerDelay, 0.5f);
+                StartCoroutine(loadNextRoom(answerDelay,rightAnswer));
+            
+          
 
         }
         

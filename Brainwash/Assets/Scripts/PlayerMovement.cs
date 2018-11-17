@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour {
 
         startingRoom.InitializeRoom(true);
         currentRoom = startingRoom;
+        Camera.main.transform.position = currentRoom.CameraTransform.position;
+        Camera.main.transform.rotation = currentRoom.CameraTransform.rotation;
         transform.position = targets[target];
         anim = GetComponentInChildren<Animator>();
 

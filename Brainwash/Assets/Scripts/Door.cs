@@ -20,10 +20,6 @@ public class Door : MonoBehaviour {
     public int Damage { get { return damage; } }
 
 
-    //sound that plays when you make a choice
-    [SerializeField]
-    private AudioSource soundAnswer;
-
     [SerializeField]
     private Animator killTarget;
 

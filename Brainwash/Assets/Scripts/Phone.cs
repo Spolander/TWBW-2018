@@ -14,10 +14,18 @@ public class Phone :Interactable {
 
             {
                 speaker.Play();
+                StartCoroutine(phoneDelay(speaker.clip.length));
             }
           
     }
+    IEnumerator phoneDelay(float seconds)
+    {
+        PlayerMovement.playerInstance.CanMove = false;
 
+        yield return new WaitForSeconds(seconds);
+
+        PlayerMovement.playerInstance.CanMove = true;
+    }
    
 
 }
