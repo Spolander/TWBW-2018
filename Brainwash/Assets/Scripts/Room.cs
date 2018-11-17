@@ -18,10 +18,12 @@ public class Room : MonoBehaviour {
     private AudioSource phone;
 
 
-    void InitializeRoom(bool lastAnwserRight)
+    public void InitializeRoom(bool lastAnwserRight)
     {
         if(phone != null)
         phone.Play();
+
+        PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
     }
     //player calls this when near a chosen door
     public void DoorReached(bool rightAnswer)
