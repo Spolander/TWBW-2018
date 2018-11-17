@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
 	public int target = 1;
 	public int last = 1;
 
+    public int Last { get { return last; } }
+
 	public float speed;
 
 	private float step;
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour {
     private Door targetDoor;
 
     public Door TargetDoor { set { targetDoor = value; } }
+
+    Animator anim;
     void Awake()
     {
         playerInstance = this;
@@ -52,6 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         startingRoom.InitializeRoom(true);
         currentRoom = startingRoom;
         transform.position = targets[target];
+        anim = GetComponentInChildren<Animator>();
 
 	}
 	
@@ -61,7 +66,7 @@ public class PlayerMovement : MonoBehaviour {
         //move the player if movement is enabled
         if (canMove)
         {
-            step = speed * Time.deltaTime;
+            step = Mathf.MoveTowards(step, speed * Time.deltaTime,Time.deltaTime/3);
 
             if (target != 1)
             {
@@ -75,7 +80,20 @@ public class PlayerMovement : MonoBehaviour {
                     if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance)
                     {
                         canMove = false;
+
+                        //Do damage to player if needed
+                        if (targetDoor.DoDamage)
+                            Player.hitPoints -= targetDoor.Damage;
+
+                        //proceed to next room
                         currentRoom.DoorReached(targetDoor.RightAnswer);
+
+                        anim.SetBool("running", false);
+                        step = 0;
+                    }
+                    else
+                    {
+                        anim.SetBool("running", true);
                     }
                 }
                 else
@@ -84,6 +102,7 @@ public class PlayerMovement : MonoBehaviour {
 
                     if (Vector3.Distance(transform.position, targets[1]) < 0.05f)
                     {
+                        step = 0;
                         last = 1;
                     }
                 }
@@ -97,7 +116,11 @@ public class PlayerMovement : MonoBehaviour {
                     objectReached = true;
                     currentInteractTarget.Interact();
                     currentInteractTarget = null;
+                    anim.SetBool("running", false);
+                    step = 0;
                 }
+                else if (Vector3.Distance(transform.position, targets[target]) > reachingDistance)
+                    anim.SetBool("running", true);
             }
 
         }
@@ -114,7 +137,10 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void setMovement(int index){
-		
+
+        if (target == index)
+            return;
+
 		last = target;
 		target = index;
 	}

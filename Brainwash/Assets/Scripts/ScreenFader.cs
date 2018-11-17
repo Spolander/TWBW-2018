@@ -38,6 +38,8 @@ public class ScreenFader : MonoBehaviour {
         bottomBar.offsetMin = bottomBarMin;
         bottomBar.offsetMax = bottomBarMax;
 
+        topBar.gameObject.SetActive(true);
+        bottomBar.gameObject.SetActive(true);
         anim.Play("open");
 	}
 

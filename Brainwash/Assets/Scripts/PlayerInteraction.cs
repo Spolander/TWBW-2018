@@ -62,17 +62,25 @@ public class PlayerInteraction : MonoBehaviour {
                 {
                     PlayerMovement.playerInstance.TargetDoor = hit.collider.GetComponent<Door>();
                     PlayerMovement.playerInstance.setMovement(0);
+                    PlayerMovement.playerInstance.transform.localScale = new Vector3(-1, 1, 1);
                 }
                 else if (hit.transform.tag == "doorRight")
                 {
                     PlayerMovement.playerInstance.TargetDoor = hit.collider.GetComponent<Door>();
                     PlayerMovement.playerInstance.setMovement(2);
+                    PlayerMovement.playerInstance.transform.localScale = new Vector3(1, 1, 1);
                 }
                 else if (hit.transform.GetComponent<Interactable>())
                 {
                     PlayerMovement.playerInstance.setMovement(1);
                     PlayerMovement.playerInstance.CurrentInteractTarget = hit.transform.GetComponent<Interactable>();
                     PlayerMovement.playerInstance.ObjectReached = false;
+
+                    if(PlayerMovement.playerInstance.last == 0)
+                        PlayerMovement.playerInstance.transform.localScale = new Vector3(1, 1, 1);
+                    else
+                        PlayerMovement.playerInstance.transform.localScale = new Vector3(-1, 1, 1);
+
                 }
 			}
 		}

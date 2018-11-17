@@ -30,6 +30,8 @@ public class Room : MonoBehaviour {
     //player calls this when near a chosen door
     public void DoorReached(bool rightAnswer)
     {
+
+        //väärä vastaus
         if (rightAnswer == false)
         {
             Player.hitPoints -= 1;
@@ -38,26 +40,25 @@ public class Room : MonoBehaviour {
             if (Player.hitPoints <= 0)
             {
 
-                if (rightAnswer)
-                {
-                    //good ending
-                    gameOver(rightAnswer);
-                }
-                else
-                {
-                    //bad ending
-                    gameOver(rightAnswer);
-                }
-               
+
+                gameOver(rightAnswer);
                 return;
             }
 
         }
+
+        //oikea vastaus
         else
         {
-            print("RIGHT ANSWER DUDE");
+            if (Player.hitPoints <= 0)
+            {
+                //good ending
+                gameOver(true);
+            }
         }
 
+
+      
 
         if (nextRoom)
         {
@@ -65,11 +66,7 @@ public class Room : MonoBehaviour {
             StartCoroutine(loadNextRoom(rightAnswer));
 
         }
-        else
-        {
-            //load ending
-            print("load goooood ending");
-        }
+        
     }
 
 
