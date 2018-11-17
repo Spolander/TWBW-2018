@@ -7,7 +7,7 @@ public class Door : MonoBehaviour {
     [SerializeField]
     private bool rightAnswer;
 
-    public bool RightAnswer { get { return rightAnswer; } }
+    public bool RightAnswer { get { return rightAnswer; } set { rightAnswer = value; } }
 
     [SerializeField]
     private bool doDamage = false;

@@ -34,21 +34,23 @@ public class Room : MonoBehaviour {
 
     public void InitializeRoom(bool lastAnwserRight)
     {
-        if(questionSound != null)
+        if (questionSound != null)
         {
             if (inVoiceSpecial)
             {
                 inVoiceSpecial.Play();
                 questionSound.PlayDelayed(inVoiceSpecial.clip.length);
-                StartCoroutine(playerWaitTime(questionSound.clip.length+inVoiceSpecial.clip.length));
+                StartCoroutine(playerWaitTime(questionSound.clip.length + inVoiceSpecial.clip.length));
             }
             else
             {
                 questionSound.Play();
                 StartCoroutine(playerWaitTime(questionSound.clip.length));
             }
-            
+
         }
+        else
+            PlayerMovement.playerInstance.CanMove = true;
        
 
         PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
@@ -88,7 +90,7 @@ public class Room : MonoBehaviour {
         {
             if(this.rightAnswer)
             {
-                if (door.name == "vapaus")
+                if (door.name == "raha")
                     this.wrongAnswer.Play();
                 else
                 this.rightAnswer.Play();

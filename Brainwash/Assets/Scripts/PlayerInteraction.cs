@@ -57,7 +57,6 @@ public class PlayerInteraction : MonoBehaviour {
 
 			if (Physics.Raycast (ray, out hit, 50f, raycastLayer)) {
 
-                print(hit.collider.name);
                 if (hit.transform.tag == "doorLeft")
                 {
                     PlayerMovement.playerInstance.TargetDoor = hit.collider.GetComponent<Door>();
