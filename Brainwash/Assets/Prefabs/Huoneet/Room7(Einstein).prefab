@@ -1326,7 +1326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightAnswer: 0
-  doDamage: 1
+  doDamage: 0
   damage: 1
   killTarget: {fileID: 0}
 --- !u!114 &114373419539245290

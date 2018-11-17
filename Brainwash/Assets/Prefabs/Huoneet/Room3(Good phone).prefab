@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 114025811111453550}
   - component: {fileID: 82929574107980126}
   - component: {fileID: 167967469397861426}
-  - component: {fileID: 165838244292820016}
   m_Layer: 0
   m_Name: GoodPuhelin
   m_TagString: Untagged
@@ -1077,7 +1076,8 @@ AudioSource:
   m_GameObject: {fileID: 1610856708985140}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243897340741991116, guid: c3b12efe74e40164cb7d9adcf08d0f53,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 170e0b32987aab548b06056a7aef9297, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1196,6 +1196,7 @@ MonoBehaviour:
   questionSound: {fileID: 0}
   rightAnswer: {fileID: 0}
   wrongAnswer: {fileID: 0}
+  inVoiceSpecial: {fileID: 0}
 --- !u!114 &114874441331622602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1226,15 +1227,6 @@ MonoBehaviour:
   doDamage: 0
   damage: 1
   killTarget: {fileID: 0}
---- !u!165 &165838244292820016
-AudioHighPassFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610856708985140}
-  m_Enabled: 1
-  m_CutoffFrequency: 7000
-  m_HighpassResonanceQ: 1
 --- !u!167 &167967469397861426
 AudioReverbZone:
   m_ObjectHideFlags: 1

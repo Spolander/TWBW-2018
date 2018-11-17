@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
                       
 
                         //proceed to next room
-                        currentRoom.DoorReached(targetDoor.RightAnswer, targetDoor.KillTarget ? true:false);
+                        currentRoom.DoorReached(targetDoor.RightAnswer, targetDoor.KillTarget ? true:false, targetDoor.gameObject);
 
                         anim.SetBool("running", false);
                         step = 0;

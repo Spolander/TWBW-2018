@@ -969,6 +969,7 @@ MonoBehaviour:
   questionSound: {fileID: 0}
   rightAnswer: {fileID: 0}
   wrongAnswer: {fileID: 0}
+  inVoiceSpecial: {fileID: 0}
 --- !u!114 &114235494378405138
 MonoBehaviour:
   m_ObjectHideFlags: 1

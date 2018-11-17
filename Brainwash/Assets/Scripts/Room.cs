@@ -54,7 +54,7 @@ public class Room : MonoBehaviour {
         PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
     }
     //player calls this when near a chosen door
-    public void DoorReached(bool rightAnswer, bool killTarget)
+    public void DoorReached(bool rightAnswer, bool killTarget, GameObject door)
     {
 
         float answerDelay = 0;
@@ -62,6 +62,7 @@ public class Room : MonoBehaviour {
         if (rightAnswer == false)
         {
             Player.hitPoints -= 1;
+            print(Player.hitPoints);
             print("WRONG ANSWER BUDDY");
 
             if (Player.hitPoints <= 0)
@@ -87,6 +88,9 @@ public class Room : MonoBehaviour {
         {
             if(this.rightAnswer)
             {
+                if (door.name == "vapaus")
+                    this.wrongAnswer.Play();
+                else
                 this.rightAnswer.Play();
                 answerDelay = this.rightAnswer.clip.length;
             }
