@@ -25,12 +25,21 @@ public class PlayerMovement : MonoBehaviour {
 
     //has the player reached a door or an interactable 
     private bool objectReached = false;
+    public bool ObjectReached { set { objectReached = value; } }
 
     //target for player. if target is the phone for example, the player goes to the middle point and interacts with it
     private Interactable currentInteractTarget;
-
+    public Interactable CurrentInteractTarget { set { currentInteractTarget = value; } }
 
     private float reachingDistance = 0.5f;
+
+    private Room currentRoom;
+
+    public Room CurrentRoom { set { currentRoom = value; } }
+
+    private Door targetDoor;
+
+    public Door TargetDoor { set { targetDoor = value; } }
     void Awake()
     {
         playerInstance = this;
@@ -41,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
 		targets = new Vector3[3];
 
         startingRoom.InitializeRoom(true);
+        currentRoom = startingRoom;
+        transform.position = targets[target];
 
 	}
 	
@@ -61,9 +72,10 @@ public class PlayerMovement : MonoBehaviour {
                     transform.position = Vector3.MoveTowards(transform.position, targets[target], step);
 
                     //if near door, activate room door reached, get boolean from door script
-                    if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance && objectReached == false)
+                    if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance)
                     {
-
+                        canMove = false;
+                        currentRoom.DoorReached(targetDoor.RightAnswer);
                     }
                 }
                 else
@@ -76,9 +88,16 @@ public class PlayerMovement : MonoBehaviour {
                     }
                 }
             }
-            else
+            else if(target == 1)
             {
                 transform.position = Vector3.MoveTowards(transform.position, targets[target], step);
+
+                if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance && objectReached == false && currentInteractTarget != null)
+                {
+                    objectReached = true;
+                    currentInteractTarget.Interact();
+                    currentInteractTarget = null;
+                }
             }
 
         }

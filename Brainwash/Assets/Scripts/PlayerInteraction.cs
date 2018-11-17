@@ -60,16 +60,19 @@ public class PlayerInteraction : MonoBehaviour {
                 print(hit.collider.name);
                 if (hit.transform.tag == "doorLeft")
                 {
-
+                    PlayerMovement.playerInstance.TargetDoor = hit.collider.GetComponent<Door>();
                     PlayerMovement.playerInstance.setMovement(0);
                 }
                 else if (hit.transform.tag == "doorRight")
                 {
+                    PlayerMovement.playerInstance.TargetDoor = hit.collider.GetComponent<Door>();
                     PlayerMovement.playerInstance.setMovement(2);
                 }
                 else if (hit.transform.GetComponent<Interactable>())
                 {
-                    hit.transform.GetComponent<Interactable>().Interact();
+                    PlayerMovement.playerInstance.setMovement(1);
+                    PlayerMovement.playerInstance.CurrentInteractTarget = hit.transform.GetComponent<Interactable>();
+                    PlayerMovement.playerInstance.ObjectReached = false;
                 }
 			}
 		}
