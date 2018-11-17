@@ -17,18 +17,24 @@ public class Room : MonoBehaviour {
     private Transform cameraTransform;
 
     [SerializeField]
-    private AudioSource phone;
+    private AudioSource questionSound;
+
+    [SerializeField]
+    private AudioSource rightAnswer;
+
+    [SerializeField]
+    private AudioSource wrongAnswer;
 
 
     public void InitializeRoom(bool lastAnwserRight)
     {
-        if(phone != null)
-        phone.Play();
+        if(questionSound != null)
+        questionSound.Play();
 
         PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
     }
     //player calls this when near a chosen door
-    public void DoorReached(bool rightAnswer)
+    public void DoorReached(bool rightAnswer, bool killTarget)
     {
 
         //väärä vastaus
@@ -62,18 +68,30 @@ public class Room : MonoBehaviour {
 
         if (nextRoom)
         {
-            ScreenFader.instance.Fade(0.5f);
-            StartCoroutine(loadNextRoom(rightAnswer));
+            //jos on tapettu jokin äijä, niin odotetaan hetki reaktiota ja sitten aloitetaan fade
+            if (killTarget)
+            {
+                ScreenFader.instance.Fade(2, 0.5f);
+                StartCoroutine(loadNextRoom(2,rightAnswer));
+            }
+            else
+            {
+                ScreenFader.instance.Fade(0, 0.5f);
+                StartCoroutine(loadNextRoom(0,rightAnswer));
+            }
+
+
+           
 
         }
         
     }
 
 
-    IEnumerator loadNextRoom(bool rightAnswer)
+    IEnumerator loadNextRoom(float delay, bool rightAnswer)
     {
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay + 1);
+  
       
 
         //activate new room

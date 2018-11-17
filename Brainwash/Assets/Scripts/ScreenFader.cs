@@ -46,7 +46,7 @@ public class ScreenFader : MonoBehaviour {
     // Update is called once per frame
 
 
-    public void Fade(float middlePause)
+    public void Fade(float initialDelay, float middlePause)
     {
         if (fading)
             return;
@@ -56,12 +56,15 @@ public class ScreenFader : MonoBehaviour {
         topBar.gameObject.SetActive(true);
         bottomBar.gameObject.SetActive(true);
 
-        anim.Play("close");
-        StartCoroutine(fadeDelay(middlePause));
+        
+        StartCoroutine(fadeDelay(initialDelay, middlePause));
     }
 
-    IEnumerator fadeDelay(float middlePause)
+    IEnumerator fadeDelay(float initialDelay, float middlePause)
     {
+
+        yield return new WaitForSeconds(initialDelay);
+        anim.Play("close");
         yield return new WaitForSeconds(0.6f + middlePause);
 
         anim.Play("open");

@@ -18,4 +18,14 @@ public class Door : MonoBehaviour {
     private int damage = 0;
 
     public int Damage { get { return damage; } }
+
+
+    //sound that plays when you make a choice
+    [SerializeField]
+    private AudioSource soundAnswer;
+
+    [SerializeField]
+    private Animator killTarget;
+
+    public Animator KillTarget { get { return killTarget; } }
 }

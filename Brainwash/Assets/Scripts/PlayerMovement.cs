@@ -85,8 +85,15 @@ public class PlayerMovement : MonoBehaviour {
                         if (targetDoor.DoDamage)
                             Player.hitPoints -= targetDoor.Damage;
 
+                        //jos tapetaan hahmo
+                        if (targetDoor.KillTarget)
+                        {
+                            targetDoor.KillTarget.Play("death");
+                        }
+                      
+
                         //proceed to next room
-                        currentRoom.DoorReached(targetDoor.RightAnswer);
+                        currentRoom.DoorReached(targetDoor.RightAnswer, targetDoor.KillTarget ? true:false);
 
                         anim.SetBool("running", false);
                         step = 0;

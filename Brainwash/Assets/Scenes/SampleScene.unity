@@ -145,6 +145,8 @@ MonoBehaviour:
   rightAnswer: 0
   doDamage: 0
   damage: 0
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!1 &125285878
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +361,8 @@ MonoBehaviour:
   rightAnswer: 1
   doDamage: 0
   damage: 0
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!1001 &355753542
 Prefab:
   m_ObjectHideFlags: 0
@@ -472,6 +476,8 @@ MonoBehaviour:
   rightAnswer: 0
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &457483407
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -594,6 +600,8 @@ MonoBehaviour:
   rightAnswer: 1
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &538920033
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1783,6 +1791,8 @@ MonoBehaviour:
   rightAnswer: 1
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &1093490631
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2656,6 +2666,8 @@ MonoBehaviour:
   rightAnswer: 1
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &1615962955
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2687,6 +2699,8 @@ MonoBehaviour:
   rightAnswer: 0
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &1699244447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2718,6 +2732,8 @@ MonoBehaviour:
   rightAnswer: 0
   doDamage: 0
   damage: 1
+  soundAnswer: {fileID: 0}
+  killTarget: {fileID: 0}
 --- !u!65 &1745311238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2912,7 +2928,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1925072948}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

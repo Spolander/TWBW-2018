@@ -11,7 +11,13 @@ public class Phone :Interactable {
     {
         if(speaker)
         if (speaker.isPlaying == false)
-            speaker.Play();
+
+            {
+                speaker.Play();
+            }
+          
     }
+
+   
 
 }
