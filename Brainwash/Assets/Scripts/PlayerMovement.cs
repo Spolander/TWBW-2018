@@ -21,6 +21,16 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField]
     private Room startingRoom;
+
+
+    //has the player reached a door or an interactable 
+    private bool objectReached = false;
+
+    //target for player. if target is the phone for example, the player goes to the middle point and interacts with it
+    private Interactable currentInteractTarget;
+
+
+    private float reachingDistance = 0.5f;
     void Awake()
     {
         playerInstance = this;
@@ -51,6 +61,10 @@ public class PlayerMovement : MonoBehaviour {
                     transform.position = Vector3.MoveTowards(transform.position, targets[target], step);
 
                     //if near door, activate room door reached, get boolean from door script
+                    if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance && objectReached == false)
+                    {
+
+                    }
                 }
                 else
                 {
@@ -62,6 +76,11 @@ public class PlayerMovement : MonoBehaviour {
                     }
                 }
             }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targets[target], step);
+            }
+
         }
 
 	}
