@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
     //voidaan hallita pelaajan liikkumista 
     private bool canMove = true;
-    public bool CanMove { set { canMove = value; } }
+    public bool CanMove { set { canMove = value; }get { return canMove; } }
 
     [SerializeField]
     private Room startingRoom;

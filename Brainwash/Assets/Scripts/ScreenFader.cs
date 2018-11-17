@@ -74,7 +74,7 @@ public class ScreenFader : MonoBehaviour {
         topBar.gameObject.SetActive(false);
         bottomBar.gameObject.SetActive(false);
 
-        PlayerMovement.playerInstance.CanMove = true;
+        
 
         fading = false;
     }

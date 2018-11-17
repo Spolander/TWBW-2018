@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour {
         //Ray dray = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));
         //Debug.DrawRay(dray.origin, dray.direction.normalized*100);
 
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetMouseButtonDown (0) && PlayerMovement.playerInstance.CanMove) {
 
             //raycastataan normalisoiduilla koordinaateilla jotka muuntaa sen screen koordinaatteihin
 			Ray ray = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));

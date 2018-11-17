@@ -27,12 +27,29 @@ public class Room : MonoBehaviour {
     [SerializeField]
     private AudioSource wrongAnswer;
 
+    [SerializeField]
+    private AudioSource inVoiceSpecial;
+
 
 
     public void InitializeRoom(bool lastAnwserRight)
     {
         if(questionSound != null)
-        questionSound.Play();
+        {
+            if (inVoiceSpecial)
+            {
+                inVoiceSpecial.Play();
+                questionSound.PlayDelayed(inVoiceSpecial.clip.length);
+                StartCoroutine(playerWaitTime(questionSound.clip.length+inVoiceSpecial.clip.length));
+            }
+            else
+            {
+                questionSound.Play();
+                StartCoroutine(playerWaitTime(questionSound.clip.length));
+            }
+            
+        }
+       
 
         PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
     }
@@ -131,5 +148,12 @@ public class Room : MonoBehaviour {
     void gameOver(bool goodEnding)
     {
         print("Game over man");
+    }
+
+    IEnumerator playerWaitTime(float time)
+    {
+        PlayerMovement.playerInstance.CanMove = false;
+        yield return new WaitForSeconds(time);
+        PlayerMovement.playerInstance.CanMove = true;
     }
 }
