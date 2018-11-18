@@ -13,13 +13,15 @@ public class PlayerInteraction : MonoBehaviour {
     private RenderTexture rendTex;
 
 
+    public Texture2D defaultCursor;
 
+    public Texture2D interactCursor;
 
 	// Use this for initialization
 	void Awake () {
         cam = Camera.main;
         Cursor.lockState = CursorLockMode.Confined;
-
+        Cursor.SetCursor(defaultCursor, Vector2.one, CursorMode.ForceSoftware);
       
 	}
 	
@@ -49,7 +51,18 @@ public class PlayerInteraction : MonoBehaviour {
         //Ray dray = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));
         //Debug.DrawRay(dray.origin, dray.direction.normalized*100);
 
-		if (Input.GetMouseButtonDown (0) && PlayerMovement.playerInstance.CanMove) {
+        Ray checkRay = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));
+        RaycastHit checkHit;
+
+        if (Physics.Raycast(checkRay, out checkHit, 50f, raycastLayer))
+        {
+            if (checkHit.transform.tag == "doorLeft" || checkHit.transform.tag == "doorRight" || checkHit.transform.GetComponent<Interactable>())
+            {
+                Cursor.SetCursor(interactCursor, Vector2.one, CursorMode.ForceSoftware);
+            }
+        }
+
+            if (Input.GetMouseButtonDown (0) && PlayerMovement.playerInstance.CanMove) {
 
             //raycastataan normalisoiduilla koordinaateilla jotka muuntaa sen screen koordinaatteihin
 			Ray ray = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));

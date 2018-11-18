@@ -22,6 +22,12 @@ public class soundEngine : MonoBehaviour {
     [SerializeField]
     private AudioClip deathSound;
 
+    [SerializeField]
+    private AudioSource successSource;
+
+    [SerializeField]
+    private AudioSource failSound;
+
     private void Awake()
     {
         instance = this;
@@ -57,5 +63,15 @@ public class soundEngine : MonoBehaviour {
         if (a.clip)
             Destroy(g, a.clip.length);
 
+    }
+
+    public void SuccessSound()
+    {
+        successSource.Play();
+    }
+
+    public void FailSound()
+    {
+        failSound.Play();
     }
 }

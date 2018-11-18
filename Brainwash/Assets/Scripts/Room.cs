@@ -68,6 +68,7 @@ public class Room : MonoBehaviour {
         //väärä vastaus
         if (rightAnswer == false)
         {
+            soundEngine.instance.FailSound();
             damageFlash.instance.Flash();
             Player.hitPoints -= 1;
             print(Player.hitPoints);
@@ -102,6 +103,7 @@ public class Room : MonoBehaviour {
         //oikea vastaus
         else
         {
+            soundEngine.instance.SuccessSound();
             if(this.rightAnswer)
             {
                 if (door.name == "raha")
