@@ -90,10 +90,12 @@ public class PlayerMovement : MonoBehaviour {
                         //jos tapetaan hahmo
                         if (targetDoor.KillTarget)
                         {
+                            soundEngine.instance.PlaySoundAt(targetDoor.KillTarget.transform.position, soundEngine.SoundClip.GunSound,0);
+                            soundEngine.instance.PlaySoundAt(targetDoor.KillTarget.transform.position, soundEngine.SoundClip.Death, 0.8f);
                             targetDoor.KillTarget.Play("death");
                         }
-                      
 
+                        actionMusic.instance.MusicState(false);
                         //proceed to next room
                         currentRoom.DoorReached(targetDoor.RightAnswer, targetDoor.KillTarget ? true:false, targetDoor.gameObject);
 
@@ -147,11 +149,27 @@ public class PlayerMovement : MonoBehaviour {
 
 	public void setMovement(int index){
 
-        if (target == index)
+        if (index == target)
             return;
 
-		last = target;
-		target = index;
+        if (target == 0 && index == 2 && last == 2)
+        {
+            last = 1;
+            target = index;
+            return;
+        }
+        else if (target == 2 && index == 0 && last == 0)
+        {
+            last = 1;
+            target = index;
+            return;
+        }
+
+    
+            last = target;
+            target = index;
+       
+    
 	}
 
 }

@@ -6,6 +6,6 @@ public class AnimationEvents : MonoBehaviour {
 
     public void FootStep()
     {
-        soundEngine.instance.PlaySoundAt(transform.position, soundEngine.SoundClip.Footstep);
+        soundEngine.instance.PlaySoundAt(transform.position, soundEngine.SoundClip.Footstep,0);
     }
 }

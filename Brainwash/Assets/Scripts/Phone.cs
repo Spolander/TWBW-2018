@@ -7,12 +7,25 @@ public class Phone :Interactable {
     [SerializeField]
     private AudioSource speaker;
 
+    
+    private bool answered = false;
+
+    [SerializeField]
+    private AudioSource phoneRing;
     public override void Interact()
     {
+
+        if (answered)
+            return;
+
         if(speaker)
         if (speaker.isPlaying == false)
 
             {
+                GetComponent<Animator>().speed = 0;
+                GetComponent<Animator>().Play("phoneRing", 0, 0);
+                answered = true;
+                phoneRing.Stop();
                 speaker.Play();
                 StartCoroutine(phoneDelay(speaker.clip.length));
             }
@@ -26,6 +39,10 @@ public class Phone :Interactable {
 
         PlayerMovement.playerInstance.CanMove = true;
     }
-   
+    public void PhoneRingSound()
+    {
+        if(answered == false)
+        phoneRing.Play();
+    }
 
 }

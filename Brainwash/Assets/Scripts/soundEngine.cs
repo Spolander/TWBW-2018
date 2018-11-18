@@ -6,7 +6,7 @@ public class soundEngine : MonoBehaviour {
 
     public static soundEngine instance;
 
-    public enum SoundClip {Footstep, GunSound, RightAnswer, WrongAnswer};
+    public enum SoundClip {Footstep, GunSound, RightAnswer, WrongAnswer, Death};
 
 
     [SerializeField]
@@ -19,13 +19,16 @@ public class soundEngine : MonoBehaviour {
     [SerializeField]
     private AudioClip gunSound;
 
+    [SerializeField]
+    private AudioClip deathSound;
+
     private void Awake()
     {
         instance = this;
     }
 
 
-    public void PlaySoundAt(Vector3 pos, SoundClip clip)
+    public void PlaySoundAt(Vector3 pos, SoundClip clip,float delay)
     {
 
         GameObject g = new GameObject("sound clip");
@@ -44,9 +47,12 @@ public class soundEngine : MonoBehaviour {
         {
             a.clip = gunSound;
         }
-
+        else if (clip == SoundClip.Death)
+        {
+            a.clip = deathSound;
+        }
         g.transform.position = pos;
-        a.Play();
+        a.PlayDelayed(delay);
 
         if (a.clip)
             Destroy(g, a.clip.length);

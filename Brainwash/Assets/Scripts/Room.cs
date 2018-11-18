@@ -30,7 +30,8 @@ public class Room : MonoBehaviour {
     [SerializeField]
     private AudioSource inVoiceSpecial;
 
-
+    [SerializeField]
+    private bool actionMusicEnabled = false;
 
     public void InitializeRoom(bool lastAnwserRight)
     {
@@ -51,7 +52,9 @@ public class Room : MonoBehaviour {
         }
         else
             PlayerMovement.playerInstance.CanMove = true;
-       
+
+        if (actionMusicEnabled)
+            actionMusic.instance.MusicState(true);
 
         PlayerMovement.playerInstance.setTargets(wayPoints[0].position, wayPoints[1].position, wayPoints[2].position);
     }
