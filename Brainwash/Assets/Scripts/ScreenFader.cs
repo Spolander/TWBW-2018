@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class ScreenFader : MonoBehaviour {
 
 
@@ -27,6 +28,12 @@ public class ScreenFader : MonoBehaviour {
     bool fading = false;
 
     public static ScreenFader instance;
+
+    [SerializeField]
+    TMPro.TMP_Text badEndingText;
+
+    [SerializeField]
+    private AudioSource[] beeps;
 	// Use this for initialization
 	void Awake () {
 
@@ -46,7 +53,7 @@ public class ScreenFader : MonoBehaviour {
     // Update is called once per frame
 
 
-    public void Fade(float initialDelay, float middlePause)
+    public void Fade(float initialDelay, float middlePause, bool ending)
     {
         if (fading)
             return;
@@ -57,15 +64,22 @@ public class ScreenFader : MonoBehaviour {
         bottomBar.gameObject.SetActive(true);
 
         
-        StartCoroutine(fadeDelay(initialDelay, middlePause));
+        StartCoroutine(fadeDelay(initialDelay, middlePause, ending));
     }
 
-    IEnumerator fadeDelay(float initialDelay, float middlePause)
+    IEnumerator fadeDelay(float initialDelay, float middlePause, bool ending)
     {
 
         yield return new WaitForSeconds(initialDelay);
         anim.Play("close");
         yield return new WaitForSeconds(0.6f + middlePause);
+
+        print(ending);
+        if (ending)
+        {
+            StartCoroutine(endingAnimation());
+            yield break;
+        }
 
         anim.Play("open");
 
@@ -77,6 +91,40 @@ public class ScreenFader : MonoBehaviour {
         
 
         fading = false;
+    }
+
+    IEnumerator endingAnimation()
+    {
+        if (Room.goodEndingAchieved)
+        {
+            SceneManager.LoadScene(1);
+
+        }
+        else
+        {
+            string s = "EPÄSOPIVA YKSILÖ";
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                badEndingText.text = badEndingText.text + s[i];
+                beeps[Random.Range(0, 2)].Play();
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            s = "SULJETAAN MODUULI";
+            yield return new WaitForSeconds(1.5f);
+            badEndingText.text = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                badEndingText.text = badEndingText.text + s[i];
+                beeps[Random.Range(0, 2)].Play();
+                yield return new WaitForSeconds(0.2f);
+            }
+            yield return new WaitForSeconds(0.5f);
+            Application.Quit();
+             
+        }
+        yield return null;
     }
    
 }

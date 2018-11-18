@@ -33,6 +33,8 @@ public class Room : MonoBehaviour {
     [SerializeField]
     private bool actionMusicEnabled = false;
 
+    public static bool goodEndingAchieved= false;
+
     public void InitializeRoom(bool lastAnwserRight)
     {
         if (questionSound != null)
@@ -73,8 +75,16 @@ public class Room : MonoBehaviour {
             if (Player.hitPoints <= 0)
             {
 
+                if (this.wrongAnswer)
+                {
+                    this.wrongAnswer.Play();
+                    StartCoroutine(gameOverAnimation(false, this.wrongAnswer.clip.length));
+                }
+          
+                
+                else
+                    StartCoroutine(gameOverAnimation(false, 0));
 
-                gameOver(false);
                 return;
             }
             else
@@ -103,7 +113,8 @@ public class Room : MonoBehaviour {
             if (Player.hitPoints <= 0)
             {
                 //good ending
-                gameOver(true);
+                StartCoroutine(gameOverAnimation(true, 0));
+                return;
             }
         }
 
@@ -113,7 +124,7 @@ public class Room : MonoBehaviour {
         if (nextRoom)
         {
 
-                ScreenFader.instance.Fade(answerDelay, 0.5f);
+                ScreenFader.instance.Fade(answerDelay, 0.5f,false);
                 StartCoroutine(loadNextRoom(answerDelay,rightAnswer));
             
           
@@ -154,10 +165,13 @@ public class Room : MonoBehaviour {
         //disable self
         gameObject.SetActive(false);
     }
-    void gameOver(bool goodEnding)
+  
+
+    IEnumerator gameOverAnimation(bool goodEnding, float delay)
     {
-        if(goodEnding)
-        print("Good ending");
+        yield return new WaitForSeconds(delay);
+        goodEndingAchieved = goodEnding;
+        ScreenFader.instance.Fade(0, 0.5f, true);
     }
 
     IEnumerator playerWaitTime(float time)

@@ -15,7 +15,7 @@ public class Door : MonoBehaviour {
     public bool DoDamage { get { return doDamage; } }
 
     [SerializeField]
-    private int damage = 0;
+    private int damage = 1;
 
     public int Damage { get { return damage; } }
 

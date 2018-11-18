@@ -82,10 +82,13 @@ public class PlayerMovement : MonoBehaviour {
                     if (Vector3.Distance(transform.position, targets[target]) <= reachingDistance)
                     {
                         canMove = false;
-
                         //Do damage to player if needed
-                        if (targetDoor.DoDamage)
+                        if (targetDoor.DoDamage == true)
+                        {
                             Player.hitPoints -= targetDoor.Damage;
+                            print(Player.hitPoints);
+                        }
+                          
 
                         //jos tapetaan hahmo
                         if (targetDoor.KillTarget)
