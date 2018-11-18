@@ -172,6 +172,7 @@ public class Room : MonoBehaviour {
 
     IEnumerator gameOverAnimation(bool goodEnding, float delay)
     {
+        Cursor.visible = false;
         yield return new WaitForSeconds(delay);
         goodEndingAchieved = goodEnding;
         ScreenFader.instance.Fade(0, 0.5f, true);

@@ -2608,12 +2608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b7d8a7b7e57a1458fe293ec1583d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &893076496 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114198467428817532, guid: 0b90f2b3cbf25a34281e41c0ec859786,
-    type: 2}
-  m_PrefabInternal: {fileID: 1610169767}
-  m_Script: {fileID: 11500000, guid: 3145f57162669904a854430cb3cc42be, type: 3}
 --- !u!82 &898830054 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 82427022289370918, guid: 79d5831f13ce0774c96c39742484762f,
@@ -2671,8 +2665,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   rendTex: {fileID: 8400000, guid: 157c277a2d6f306418a98b33d0dddd05, type: 2}
-  defaultCursor: {fileID: 2800000, guid: 4a820f6adc7a3ec4d8cd41d03c1f29a4, type: 3}
-  interactCursor: {fileID: 2800000, guid: e9f6477803c383c4c919dd50a3a0ee0b, type: 3}
+  defaultCursor: {fileID: 2800000, guid: 6431d748cbedee14da8c9407c7b3f10d, type: 3}
+  interactCursor: {fileID: 2800000, guid: 1ef83708e596c044d9ab4fd94ca74cf1, type: 3}
 --- !u!114 &901884414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2687,7 +2681,7 @@ MonoBehaviour:
   target: 1
   last: 1
   speed: 3
-  startingRoom: {fileID: 893076496}
+  startingRoom: {fileID: 1610169768}
 --- !u!1 &911253336
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,6 +5361,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b90f2b3cbf25a34281e41c0ec859786, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1610169768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114198467428817532, guid: 0b90f2b3cbf25a34281e41c0ec859786,
+    type: 2}
+  m_PrefabInternal: {fileID: 1610169767}
+  m_Script: {fileID: 11500000, guid: 3145f57162669904a854430cb3cc42be, type: 3}
 --- !u!1001 &1633983646
 Prefab:
   m_ObjectHideFlags: 0
