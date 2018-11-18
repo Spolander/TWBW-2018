@@ -21,7 +21,7 @@ public class PlayerInteraction : MonoBehaviour {
 	void Awake () {
         cam = Camera.main;
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.SetCursor(defaultCursor, Vector2.one, CursorMode.ForceSoftware);
+        Cursor.SetCursor(defaultCursor, new Vector2(defaultCursor.width/2, 0), CursorMode.ForceSoftware);
       
 	}
 	
@@ -58,11 +58,15 @@ public class PlayerInteraction : MonoBehaviour {
         {
             if (checkHit.transform.tag == "doorLeft" || checkHit.transform.tag == "doorRight" || checkHit.transform.GetComponent<Interactable>())
             {
-                Cursor.SetCursor(interactCursor, Vector2.one, CursorMode.ForceSoftware);
+                Cursor.SetCursor(interactCursor, new Vector2(defaultCursor.width / 2, 0), CursorMode.ForceSoftware);
             }
-        }
+            else Cursor.SetCursor(defaultCursor, new Vector2(defaultCursor.width / 2, 0), CursorMode.ForceSoftware);
 
-            if (Input.GetMouseButtonDown (0) && PlayerMovement.playerInstance.CanMove) {
+        }
+        else
+            Cursor.SetCursor(defaultCursor, new Vector2(defaultCursor.width / 2, 0), CursorMode.ForceSoftware);
+
+        if (Input.GetMouseButtonDown (0) && PlayerMovement.playerInstance.CanMove) {
 
             //raycastataan normalisoiduilla koordinaateilla jotka muuntaa sen screen koordinaatteihin
 			Ray ray = cam.ViewportPointToRay(new Vector3(mouseLerp.x, mouseLerp.y, 0));
