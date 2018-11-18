@@ -64,10 +64,11 @@ public class Room : MonoBehaviour {
     public void DoorReached(bool rightAnswer, bool killTarget, GameObject door)
     {
 
-        float answerDelay = 0;
+        float answerDelay = 0.5f;
         //väärä vastaus
         if (rightAnswer == false)
         {
+            damageFlash.instance.Flash();
             Player.hitPoints -= 1;
             print(Player.hitPoints);
             print("WRONG ANSWER BUDDY");

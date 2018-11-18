@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
                         if (targetDoor.DoDamage == true)
                         {
                             Player.hitPoints -= targetDoor.Damage;
-                            print(Player.hitPoints);
+                            damageFlash.instance.Flash();
                         }
                           
 

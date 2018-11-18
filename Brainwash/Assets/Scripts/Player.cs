@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public static int hitPoints = 4;
+    public static int hitPoints = 3;
 
 }
