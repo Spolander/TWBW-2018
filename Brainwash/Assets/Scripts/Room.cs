@@ -71,12 +71,12 @@ public class Room : MonoBehaviour {
             {
 
 
-                gameOver(rightAnswer);
+                gameOver(false);
                 return;
             }
             else
             {
-                if (wrongAnswer)
+                if (wrongAnswer && this.wrongAnswer)
                 {
                     wrongAnswer.Play();
                     answerDelay = wrongAnswer.clip.length;
@@ -153,7 +153,8 @@ public class Room : MonoBehaviour {
     }
     void gameOver(bool goodEnding)
     {
-        print("Game over man");
+        if(goodEnding)
+        print("Good ending");
     }
 
     IEnumerator playerWaitTime(float time)
